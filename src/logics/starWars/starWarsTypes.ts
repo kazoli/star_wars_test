@@ -1,5 +1,5 @@
 // Base type for person data of Star Wars
-export type tStarWarsPerson = {
+export type tStarWarsCharacter = {
   name: string;
 };
 
@@ -9,7 +9,6 @@ export type tStarWarsReduxState = {
 
   mainListTotalResults: number;
   mainListKeywords: string;
-  mainListPage: number;
   mainListQuery: string;
-  mainList: tStarWarsPerson[];
+  mainList: tStarWarsCharacter[];
 };

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { tStarWarsReduxState } from './starWarsTypes';
 import { initialStarWarsReduxState } from './starWarsInitialStates';
 import { starWarsGetMainList } from './starWarsThunks';
+import { buildMainQuery } from './starWarsMiddlewares';
 
 // Star Wars reducers and extra reducers
 const starWarsSlice = createSlice({
@@ -12,16 +13,17 @@ const starWarsSlice = createSlice({
       state,
       action: PayloadAction<tStarWarsReduxState['mainListQuery']>,
     ) => {
+      state.status = 'loading';
       state.mainListQuery = action.payload;
     },
     starWarsSetMainListKeywords: (
       state,
       action: PayloadAction<tStarWarsReduxState['mainListKeywords']>,
     ) => {
-      // if keywords changes, page is set back to 1st one
-      state.mainListPage = 1;
-      // remove leading and trailing white spaces
-      state.mainListKeywords = action.payload.trim();
+      // store keywords if next time send the same ignore request
+      state.mainListKeywords = action.payload;
+      // build query to request data with keywords
+      state.mainListQuery = buildMainQuery(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -31,6 +33,12 @@ const starWarsSlice = createSlice({
       })
       .addCase(starWarsGetMainList.fulfilled, (state, action) => {
         state.status = 'idle';
+        state.mainListTotalResults = action.payload.count;
+        const results: tStarWarsReduxState['mainList'] =
+          action.payload.results.map((result) => ({
+            name: result.name,
+          }));
+        state.mainList = [...state.mainList, ...results];
       })
       .addCase(starWarsGetMainList.rejected, (state) => {
         state.status = 'failed';

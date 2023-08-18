@@ -1,6 +1,6 @@
 #DESCRIPTION
 
-React and redux-toolkit based Star Wars frontend test with tailwind CSS. The Star Wars API for the backend: https://swapi.dev/api/people/
+React and redux-toolkit based Star Wars Character Search frontend test with tailwind CSS. The Star Wars API for the backend: https://swapi.dev/api/people/
 
 #LIVE DEMO
 

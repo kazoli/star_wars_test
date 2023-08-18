@@ -10,15 +10,11 @@
   * {
     @apply text-[1rem] break-words min-w-[0] focus-visible:outline-none focus:outline-none;
   }
-
-  main {
-    @apply min-h-[100vh];
-  }
 }
 
 @layer utilities {
   .content-positioner {
-    @apply m-[0_auto] px-[15px];
+    @apply px-[20px];
   }
 
   .transition-custom {

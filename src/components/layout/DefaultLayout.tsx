@@ -16,12 +16,11 @@ function DefaultLayout(props: tProps) {
     scrollToElement();
   }, []);
 
-
   return (
     <>
       {props.loading && <Loading />}
       <Header />
-      <main className="content-positioner py-[20px] sm:py-[50px]">
+      <main className="content-positioner min-h-[100vh] py-[20px] sm:py-[50px]">
         {props.children}
       </main>
       <Footer />
