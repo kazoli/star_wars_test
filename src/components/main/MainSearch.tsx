@@ -1,28 +1,21 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../logics/general/hooks';
+import { useAppDispatch } from '../../logics/general/hooks';
 import { starWarsSetMainListKeywords } from '../../logics/starWars/starWarsSlice';
 import { Box, TextField, Button } from '@mui/material';
 
 function MainSearch() {
   const dispatch = useAppDispatch();
-  const mainListKeywords = useAppSelector(
-    (state) => state.starWars.mainListKeywords,
-  );
-
-  const [form, setForm] = useState({ keywords: '' });
+  const [keywords, setKeywords] = useState('');
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const trimmedKeywords = form.keywords.trim();
-    if (trimmedKeywords !== mainListKeywords) {
-      dispatch(starWarsSetMainListKeywords(trimmedKeywords));
-    }
+    dispatch(starWarsSetMainListKeywords(keywords));
   };
 
   return (
     <Box
       component="form"
-      className="flex flex-wrap gap-[20px] flex-col items-center w-full"
+      className="flex flex-wrap gap-[20px] flex-col items-center w-full mb-[60px]"
       noValidate
       autoComplete="off"
       onSubmit={onSubmit}
@@ -32,13 +25,8 @@ function MainSearch() {
         className="w-full sm:max-w-[500px]"
         label="Search Character"
         variant="standard"
-        value={form.keywords}
-        onChange={(event) =>
-          setForm((prevstate) => ({
-            ...prevstate,
-            keywords: event.target.value,
-          }))
-        }
+        value={keywords}
+        onChange={(event) => setKeywords(event.target.value)}
       />
       <Button variant="outlined" type="submit" className="w-full sm:w-auto">
         Search Character

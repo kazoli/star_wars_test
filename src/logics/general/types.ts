@@ -1,5 +1,5 @@
-// Type of dropdown options
-export type tDropDownOption = {
-  key: string | number;
-  value: string | JSX.Element;
+// Type of select options
+export type tSelectOption = {
+  value: string | number;
+  text: string;
 };

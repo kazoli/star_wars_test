@@ -9,3 +9,20 @@ export const scrollToElement = (
     behavior: behavior,
   });
 };
+
+// General alphabetic reorder
+export const alphabetReorder = <T extends { [key: string]: string }>(
+  array: T[],
+  key: keyof T,
+  ascend = true,
+) => {
+  // creating a deep copied array to avoid mutating the original array
+  const sortedArray = [...array];
+  // sorting function
+  const sorting = (a: T, b: T) =>
+    a[key].localeCompare(b[key], undefined, { sensitivity: 'accent' });
+  // reverse the array elements if descending order is required
+  return ascend
+    ? sortedArray.sort(sorting)
+    : sortedArray.sort((a, b) => sorting(b, a));
+};

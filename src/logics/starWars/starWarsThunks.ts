@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { tStarWarsReduxState } from './starWarsTypes';
 import { errorHandler } from '../general/error';
-import { tStarWarsCharacter } from './starWarsTypes';
+import axios from 'axios';
 
 // Get data of main list
 export const starWarsGetMainList = createAsyncThunk<
   {
-    count: number;
-    results: tStarWarsCharacter[];
+    count: tStarWarsReduxState['mainListTotalResults'];
+    nextQuery: tStarWarsReduxState['mainListNextQuery'];
+    results: tStarWarsReduxState['mainList'];
   },
   string,
   { rejectValue: string }
@@ -16,6 +17,7 @@ export const starWarsGetMainList = createAsyncThunk<
     const response = await axios.get(encodeURI(query));
     return {
       count: response.data.count,
+      nextQuery: response.data.next,
       results: response.data.results,
     };
   } catch (error) {
