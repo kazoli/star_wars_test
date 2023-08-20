@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../logics/general/hooks';
-import { starWarsSetMainListKeywords } from '../../logics/starWars/starWarsSlice';
+import { starWarsSetMainListKeyword } from '../../logics/starWars/starWarsSlice';
 import { Box, TextField, Button } from '@mui/material';
 
 function MainSearch() {
   const dispatch = useAppDispatch();
-  const [keywords, setKeywords] = useState('');
+  const [keyword, setKeyword] = useState('');
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(starWarsSetMainListKeywords(keywords));
+    dispatch(starWarsSetMainListKeyword(keyword));
   };
 
   return (
@@ -25,8 +25,8 @@ function MainSearch() {
         className="w-full sm:max-w-[500px]"
         label="Search Character"
         variant="standard"
-        value={keywords}
-        onChange={(event) => setKeywords(event.target.value)}
+        value={keyword}
+        onChange={(event) => setKeyword(event.target.value)}
       />
       <Button variant="outlined" type="submit" className="w-full sm:w-auto">
         Search Character

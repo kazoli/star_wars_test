@@ -8,8 +8,8 @@ export const starWarsApiUrl = 'https://swapi.dev/api/people/';
 export const starWarsMainListSort: tSelectOption[] = [
   { value: 'name-asc', text: 'Name (A-Z)' },
   { value: 'name-desc', text: 'Name (Z-A)' },
-  { value: 'gender-asc', text: 'Females first' },
-  { value: 'gender-desc', text: 'Males first' },
+  { value: 'gender-female', text: 'Females first' },
+  { value: 'gender-male', text: 'Males first' },
 ];
 
 // Initial state of redux for Star Wars slice
@@ -17,8 +17,9 @@ export const initialStarWarsReduxState: tStarWarsReduxState = {
   status: 'idle',
 
   mainListTotalResults: 0,
-  mainListKeywords: '',
+  mainListKeyword: '',
   mainListSort: '',
+  mainListPrevQuery: '',
   mainListQuery: '',
   mainListNextQuery: '',
   mainList: [],

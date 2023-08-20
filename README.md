@@ -1,6 +1,6 @@
 #DESCRIPTION
 
-React and redux-toolkit based Star Wars Character Search frontend test with MUI and tailwind CSS. The Star Wars API for the backend: https://swapi.dev/api/people/
+React and redux-toolkit based Star Wars Character Search frontend test with MUI and Tailwind CSS. The Star Wars API for the backend: https://swapi.dev/api/people/
 
 #LIVE DEMO
 
@@ -8,7 +8,12 @@ https://kazoli.github.io/star_wars_test
 
 #FEATURES
 
-1.
+1. First it loads 10 of all characters of Star Wars.
+2. You can search for a name in search field.
+3. List can be sort by name alphabetic order or by gender. In case of gender the selected one will be sorted on the first.
+4. At list end a load button appears until next page can be loaded.
+5. 404 page is set if wrong path was requested.
+6. Logo is a link to main page.
 
 #BEFORE RUN ANY CODE
 

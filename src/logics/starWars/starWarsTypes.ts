@@ -9,8 +9,9 @@ export type tStarWarsReduxState = {
   status: 'idle' | 'loading' | 'failed';
 
   mainListTotalResults: number;
-  mainListKeywords: string;
+  mainListKeyword: string;
   mainListSort: string;
+  mainListPrevQuery: string;
   mainListQuery: string;
   mainListNextQuery: string;
   mainList: tStarWarsCharacter[];

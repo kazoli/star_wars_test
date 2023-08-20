@@ -3,8 +3,6 @@ import { useAppDispatch, useAppSelector } from '../../logics/general/hooks';
 import { starWarsSetMainListQuery } from '../../logics/starWars/starWarsSlice';
 import { starWarsGetMainList } from '../../logics/starWars/starWarsThunks';
 import { starWarsbuildMainQuery } from '../../logics/starWars/starWarsMiddlewares';
-import mockImage from '../../assets/images/mock-image.png';
-import mockImage1 from '../../assets/images/mock-image-1.png';
 import MainListHeader from './MainListHeader';
 import MainListElement from './MainListElement';
 import MainListLoadNext from './MainListLoadNext';
@@ -33,11 +31,7 @@ function MainList() {
       <MainListHeader />
       <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[20px] my-[20px]">
         {starWars.mainList.map((data, index) => (
-          <MainListElement
-            key={index}
-            data={data}
-            image={index % 2 ? mockImage : mockImage1}
-          />
+          <MainListElement key={index} data={data} />
         ))}
       </div>
       {starWars.mainListNextQuery && <MainListLoadNext />}

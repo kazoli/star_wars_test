@@ -1,15 +1,15 @@
 import { tStarWarsCharacter, tStarWarsReduxState } from './starWarsTypes';
 import { starWarsApiUrl } from './starWarsInitialStates';
-import { alphabetReorder } from '../general/middlewares';
+import { arrayReorder } from '../general/middlewares';
 
 // Build url for main list
 export const starWarsbuildMainQuery = (
-  mainListKeywords: tStarWarsReduxState['mainListKeywords'],
+  mainListKeyword: tStarWarsReduxState['mainListKeyword'],
 ) => {
   let query = '';
   // add search if it has content
-  if (mainListKeywords) {
-    query += `?search=${mainListKeywords}`;
+  if (mainListKeyword) {
+    query += `?search=${mainListKeyword}`;
   }
   // return with the final url
   return starWarsApiUrl + query;
@@ -20,10 +20,20 @@ export const starWarsListReorder = (
   mainList: tStarWarsReduxState['mainList'],
   mainListSort: tStarWarsReduxState['mainListSort'],
 ) => {
-  const sort = mainListSort.split('-');
-  return alphabetReorder(
+  const splittedSort = mainListSort.split('-');
+  let sort;
+  if (splittedSort[0] === 'gender') {
+    if (splittedSort[1] === 'male') {
+      sort = ['male'];
+    } else {
+      sort = ['female'];
+    }
+  } else {
+    sort = splittedSort[1];
+  }
+  return arrayReorder(
     mainList,
-    sort[0] as keyof tStarWarsCharacter,
-    sort[1] === 'asc',
+    splittedSort[0] as keyof tStarWarsCharacter,
+    sort,
   );
 };

@@ -19,17 +19,17 @@ const starWarsSlice = createSlice({
       state.status = 'loading';
       state.mainListQuery = action.payload;
     },
-    starWarsSetMainListKeywords: (
+    starWarsSetMainListKeyword: (
       state,
-      action: PayloadAction<tStarWarsReduxState['mainListKeywords']>,
+      action: PayloadAction<tStarWarsReduxState['mainListKeyword']>,
     ) => {
       // trim white space around the string
-      const trimmedKeywords = action.payload.trim();
-      // does not change keywords is the new one is same as the previous one
-      if (trimmedKeywords !== state.mainListKeywords) {
-        // store keywords if next time send the same ignore request
-        state.mainListKeywords = action.payload;
-        // build query to request data with keywords
+      const trimmedKeyword = action.payload.trim();
+      // does not change keyword is the new one is same as the previous one
+      if (trimmedKeyword !== state.mainListKeyword) {
+        // store keyword if next time send the same ignore request
+        state.mainListKeyword = action.payload;
+        // build query to request data with keyword
         state.mainListQuery = starWarsbuildMainQuery(action.payload);
       }
     },
@@ -56,13 +56,17 @@ const starWarsSlice = createSlice({
       .addCase(starWarsGetMainList.fulfilled, (state, action) => {
         state.status = 'idle';
         state.mainListTotalResults = action.payload.count;
+        state.mainListPrevQuery = action.payload.prevQuery ?? '';
         state.mainListNextQuery = action.payload.nextQuery ?? '';
         const results: tStarWarsReduxState['mainList'] =
           action.payload.results.map((result) => ({
             name: result.name,
             gender: result.gender,
           }));
-        state.mainList = [...state.mainList, ...results];
+        // if previous page query exist, then push next in array
+        state.mainList = state.mainListPrevQuery
+          ? [...state.mainList, ...results]
+          : results;
         // reorder list
         if (state.mainListSort) {
           state.mainList = starWarsListReorder(
@@ -79,7 +83,7 @@ const starWarsSlice = createSlice({
 
 export const {
   starWarsSetMainListQuery,
-  starWarsSetMainListKeywords,
+  starWarsSetMainListKeyword,
   starWarsSetMainListSort,
 } = starWarsSlice.actions;
 export default starWarsSlice.reducer;

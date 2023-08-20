@@ -10,19 +10,34 @@ export const scrollToElement = (
   });
 };
 
-// General alphabetic reorder
-export const alphabetReorder = <T extends { [key: string]: string }>(
+// General reorder with alphabetic or with given order array
+export const arrayReorder = <T extends { [key: string]: string }>(
   array: T[],
   key: keyof T,
-  ascend = true,
+  order: string | string[],
 ) => {
-  // creating a deep copied array to avoid mutating the original array
-  const sortedArray = [...array];
   // sorting function
-  const sorting = (a: T, b: T) =>
-    a[key].localeCompare(b[key], undefined, { sensitivity: 'accent' });
-  // reverse the array elements if descending order is required
-  return ascend
-    ? sortedArray.sort(sorting)
-    : sortedArray.sort((a, b) => sorting(b, a));
+  let sortFunction: (a: T, b: T) => number;
+  if (Array.isArray(order)) {
+    // if it is a given exact order
+    const getIndex = (element: T) => {
+      // check key exist in array element
+      const index = order.indexOf(element[key]);
+      // the given key does not matter in ordering, so pushing it into the end
+      return index === -1 ? Infinity : index;
+    };
+    // order is a key based order
+    sortFunction = (a: T, b: T) => getIndex(a) - getIndex(b);
+  } else {
+    // direction change
+    const direction = order === 'desc' ? -1 : 1;
+    // simple alphabetic order
+    sortFunction = (a: T, b: T) =>
+      direction *
+      a[key].localeCompare(b[key], undefined, {
+        sensitivity: 'accent',
+      });
+  }
+  // return the sorted array
+  return array.sort(sortFunction);
 };
