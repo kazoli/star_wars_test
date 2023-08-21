@@ -23,7 +23,11 @@ export const starWarsListReorder = (
   const splittedSort = mainListSort.split('-');
   let sort: string | string[];
   if (splittedSort[0] === 'gender') {
-    sort = [splittedSort[1]];
+    if (splittedSort[1] === 'male') {
+      sort = ['male'];
+    } else {
+      sort = ['female'];
+    }
   } else {
     sort = splittedSort[1];
   }
