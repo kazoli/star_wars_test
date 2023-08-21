@@ -77,6 +77,11 @@ const starWarsSlice = createSlice({
       })
       .addCase(starWarsGetMainList.rejected, (state) => {
         state.status = 'failed';
+        const errorString = 'requestError';
+        if (!state.mainListQuery.includes(errorString)) {
+          // the main query needed to be changed (cannot be empty string because that causes infinite loop) to load next button working correctly
+          state.mainListQuery += `&${errorString}`;
+        }
       });
   },
 });

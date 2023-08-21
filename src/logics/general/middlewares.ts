@@ -21,12 +21,12 @@ export const arrayReorder = <T extends { [key: string]: string }>(
   if (Array.isArray(order)) {
     // if it is a given exact order
     const getIndex = (element: T) => {
-      // check key exist in array element
+      // check the key related value of the element exists in order array
       const index = order.indexOf(element[key]);
-      // the given key does not matter in ordering, so pushing it into the end
+      // if the value related to the given key does not matter in ordering, pushing it into the end
       return index === -1 ? Infinity : index;
     };
-    // order is a key based order
+    // sorting based on an array of texts
     sortFunction = (a: T, b: T) => getIndex(a) - getIndex(b);
   } else {
     // direction change

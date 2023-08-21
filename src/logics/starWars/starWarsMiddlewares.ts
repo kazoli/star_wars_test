@@ -21,13 +21,9 @@ export const starWarsListReorder = (
   mainListSort: tStarWarsReduxState['mainListSort'],
 ) => {
   const splittedSort = mainListSort.split('-');
-  let sort;
+  let sort: string | string[];
   if (splittedSort[0] === 'gender') {
-    if (splittedSort[1] === 'male') {
-      sort = ['male'];
-    } else {
-      sort = ['female'];
-    }
+    sort = [splittedSort[1]];
   } else {
     sort = splittedSort[1];
   }

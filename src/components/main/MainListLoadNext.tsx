@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../logics/general/hooks';
-import { starWarsGetMainList } from '../../logics/starWars/starWarsThunks';
+import { starWarsSetMainListQuery } from '../../logics/starWars/starWarsSlice';
 import { Button } from '@mui/material';
 
 function MainListLoadNext() {
@@ -10,7 +10,9 @@ function MainListLoadNext() {
     <Button
       variant="outlined"
       className="w-full"
-      onClick={() => dispatch(starWarsGetMainList(starWars.mainListNextQuery))}
+      onClick={() =>
+        dispatch(starWarsSetMainListQuery(starWars.mainListNextQuery))
+      }
     >
       Load More
     </Button>
