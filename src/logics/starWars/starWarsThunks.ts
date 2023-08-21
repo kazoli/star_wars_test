@@ -7,8 +7,8 @@ import axios from 'axios';
 export const starWarsGetMainList = createAsyncThunk<
   {
     count: tStarWarsReduxState['mainListTotalResults'];
-    prevQuery: tStarWarsReduxState['mainListPrevQuery'];
-    nextQuery: tStarWarsReduxState['mainListNextQuery'];
+    prevQuery: null | tStarWarsReduxState['mainListPrevQuery'];
+    nextQuery: null | tStarWarsReduxState['mainListNextQuery'];
     results: tStarWarsReduxState['mainList'];
   },
   string,

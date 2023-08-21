@@ -12,7 +12,7 @@ https://kazoli.github.io/star_wars_test
 2. You can search for a name in search field.
 3. List can be sort by name alphabetic order or by gender. In case of gender the selected one will be sorted on the first.
 4. At list end a load button appears until next page can be loaded.
-5. 404 page is set if wrong path was requested.
+5. 404 page is loading if wrong path was requested.
 6. Logo is a link to main page.
 
 #BEFORE RUN ANY CODE

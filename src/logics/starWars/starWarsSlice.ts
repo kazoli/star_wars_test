@@ -28,9 +28,9 @@ const starWarsSlice = createSlice({
       // does not change keyword is the new one is same as the previous one
       if (trimmedKeyword !== state.mainListKeyword) {
         // store keyword if next time send the same ignore request
-        state.mainListKeyword = action.payload;
+        state.mainListKeyword = trimmedKeyword;
         // build query to request data with keyword
-        state.mainListQuery = starWarsbuildMainQuery(action.payload);
+        state.mainListQuery = starWarsbuildMainQuery(trimmedKeyword);
       }
     },
     starWarsSetMainListSort: (
@@ -67,8 +67,8 @@ const starWarsSlice = createSlice({
         state.mainList = state.mainListPrevQuery
           ? [...state.mainList, ...results]
           : results;
-        // reorder list
-        if (state.mainListSort) {
+        // reorder list if more than 1 object in array
+        if (state.mainList.length > 1 && state.mainListSort) {
           state.mainList = starWarsListReorder(
             state.mainList,
             state.mainListSort,
