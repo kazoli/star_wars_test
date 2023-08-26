@@ -10,7 +10,7 @@ export const scrollToElement = (
   });
 };
 
-// General reorder with alphabetic or with given order array
+// General reorder with alphabetic or with a given array order
 export const arrayReorder = <T extends { [key: string]: string }>(
   array: T[],
   key: keyof T,
@@ -23,7 +23,7 @@ export const arrayReorder = <T extends { [key: string]: string }>(
     const getIndex = (element: T) => {
       // check the key related value of the element exists in order array
       const index = order.indexOf(element[key]);
-      // if the value related to the given key does not matter in ordering, pushing it into the end
+      // if the value related to the given key does not matter in ordering, pushing it to the end
       return index === -1 ? Infinity : index;
     };
     // sorting based on an array of texts

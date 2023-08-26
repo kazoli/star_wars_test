@@ -3,8 +3,8 @@ import { starWarsApiUrl } from './starWarsInitialStates';
 import { arrayReorder } from '../general/middlewares';
 
 // Build url for main list
-export const starWarsbuildMainQuery = (
-  mainListKeyword: tStarWarsReduxState['mainListKeyword'],
+export const starWarsBuildMainQuery = (
+  mainListKeyword: tStarWarsReduxState['mainListKeyword'] = '',
 ) => {
   let query = '';
   // add search if it has content

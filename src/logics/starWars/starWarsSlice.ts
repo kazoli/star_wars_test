@@ -3,7 +3,7 @@ import { tStarWarsReduxState } from './starWarsTypes';
 import { initialStarWarsReduxState } from './starWarsInitialStates';
 import { starWarsGetMainList } from './starWarsThunks';
 import {
-  starWarsbuildMainQuery,
+  starWarsBuildMainQuery,
   starWarsListReorder,
 } from './starWarsMiddlewares';
 
@@ -25,12 +25,12 @@ const starWarsSlice = createSlice({
     ) => {
       // trim white space around the string
       const trimmedKeyword = action.payload.trim();
-      // does not change keyword is the new one is same as the previous one
+      // does not change keyword if the new one is the same as the previous one
       if (trimmedKeyword !== state.mainListKeyword) {
-        // store keyword if next time send the same ignore request
+        // store keyword if send the same one, next time ignores the request
         state.mainListKeyword = trimmedKeyword;
-        // build query to request data with keyword
-        state.mainListQuery = starWarsbuildMainQuery(trimmedKeyword);
+        // build query to request data based on keyword
+        state.mainListQuery = starWarsBuildMainQuery(trimmedKeyword);
       }
     },
     starWarsSetMainListSort: (
@@ -63,7 +63,7 @@ const starWarsSlice = createSlice({
             name: result.name,
             gender: result.gender,
           }));
-        // if previous page query exist, then push next in array
+        // if previous page query exists, then push next in array
         state.mainList = state.mainListPrevQuery
           ? [...state.mainList, ...results]
           : results;
@@ -79,7 +79,7 @@ const starWarsSlice = createSlice({
         state.status = 'failed';
         const errorString = 'requestError';
         if (!state.mainListQuery.includes(errorString)) {
-          // the main query needed to be changed (cannot be empty string because that causes infinite loop) to load next button working correctly
+          // the main list query needed to be changed (cannot be empty string because that causes infinite loop) to load next button working correctly
           state.mainListQuery += `&${errorString}`;
         }
       });

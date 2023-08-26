@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../logics/general/hooks';
 import { starWarsSetMainListQuery } from '../../logics/starWars/starWarsSlice';
 import { starWarsGetMainList } from '../../logics/starWars/starWarsThunks';
-import { starWarsbuildMainQuery } from '../../logics/starWars/starWarsMiddlewares';
+import { starWarsBuildMainQuery } from '../../logics/starWars/starWarsMiddlewares';
 import MainListHeader from './MainListHeader';
 import MainListElement from './MainListElement';
 import MainListLoadNext from './MainListLoadNext';
@@ -22,7 +22,7 @@ function MainList() {
       return () => clearTimeout(timerId);
     } else {
       // set initial query string
-      dispatch(starWarsSetMainListQuery(starWarsbuildMainQuery('')));
+      dispatch(starWarsSetMainListQuery(starWarsBuildMainQuery()));
     }
   }, [dispatch, starWars.mainListQuery]);
 
